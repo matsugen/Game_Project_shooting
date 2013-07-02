@@ -94,6 +94,7 @@
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="GameResource.h" />
+    <ClInclude Include="Misile.h" />
     <ClInclude Include="UsrDebug.h" />
     <ClInclude Include="DrawSystem.h" />
     <ClInclude Include="gameConlyDx.h" />
@@ -117,6 +118,7 @@
     <ClCompile Include="Ballet.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Misile.cpp" />
     <ClCompile Include="UsrDebug.cpp" />
     <ClCompile Include="DrawSystem.cpp" />
     <ClCompile Include="gameConlyDx.cpp" />

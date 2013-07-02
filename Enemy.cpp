@@ -50,8 +50,8 @@ void Enemy::init(DrawSystem *ds,ImageLoader* loader,ActorManager* manager){	//ƒA
 		tmp_option.owner=OWNER::ENEMY;
 		tmp_option.hit_flg=false;
 		tmp_option.effective=false;
-		tmp_option.m_x=m_x;
-		tmp_option.m_y=m_y;
+		tmp_option.m_x=0;
+		tmp_option.m_y=0;
 		tmp_option.m_w=ENEMY_WIDTH;
 		tmp_option.m_h=ENEMY_HEIGHT;
 		Add_Collision(tmp_option);
@@ -86,7 +86,7 @@ void Enemy::On(){
 	m_launch_flg=true;
 	m_x=GetRand(PLAYABLE_WIDTH-ENEMY_WIDTH);
 	m_y=-ENEMY_HEIGHT*2;
-	m_speed=double(GetRand((ENEMY_SPEED_MAX-ENEMY_SPEED_MIN-1)*10))/10.0+ENEMY_SPEED_MIN;
+	m_speed=(double)(GetRand((ENEMY_SPEED_MAX-ENEMY_SPEED_MIN-1)*10))/10.0+ENEMY_SPEED_MIN;
 	m_icon->init_Image(m_loader,"player",DIRECTION_DOWN);
 	m_icon->Image_Magnificant(2,2);
 	m_icon->MoveTo(m_x,m_y);

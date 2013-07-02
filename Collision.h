@@ -12,7 +12,8 @@ enum OWNER{
 }
 
 typedef struct collision_option{//collisionのオプションを設定
-	double m_x,m_y,m_w,m_h;		//判定矩形の左上座標とその大きさ
+	double m_x,m_y,m_w,m_h;		//判定矩形の左上の相対座標とその大きさ
+	double abs_x,abs_y;			//左上座標の絶対座標
 	bool hit_flg;				//ヒットしたかどうかの判断
 	bool effective;				//この判定が有効かどうか
 	OWNER::OWNER owner;				//この判定の所持者名

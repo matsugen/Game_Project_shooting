@@ -49,5 +49,6 @@
 #include"TestScene.h"
 #include"Player.h"
 #include"Bullet.h"
+#include"Misile.h"
 #include"Score_Board.h"
 #include"Enemy.h"

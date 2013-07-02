@@ -27,10 +27,15 @@ namespace GAME_RESOURCE_ID{
 #define PLAYER_HEIGHT 56		//プレイヤーアイコンのの縦幅
 
 /*弾丸のステータス*/
-#define MAX_BULLET 4			//1画面上で存在できる弾の数
-#define BULLET_WIDTH 11		//弾丸の横幅
-#define BULLET_HEIGHT 50	//弾丸の縦幅
-#define BULLET_SPEED 4		//弾丸の速度
+#define MAX_BULLET 7			//1画面上で存在できる弾の数
+#define BULLET_WIDTH 1.0f		//弾丸の横幅
+#define BULLET_HEIGHT 30	//弾丸の縦幅
+#define BULLET_SPEED 5.5f		//弾丸の速度
+/*ミサイルのステータス*/
+#define MAX_MISILE 1			//1画面上で存在できる弾の数
+#define MISILE_WIDTH 11.0f		//弾丸の横幅
+#define MISILE_HEIGHT 50.0f		//弾丸の縦幅
+#define MISILE_MAX_SPEED 7.0f	//弾丸の速度
 
 /*EnemyActorのステータス*/
 #define ENEMY_SPEED_MAX 3.0f		//敵の移動速度最大値

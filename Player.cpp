@@ -8,7 +8,9 @@ Player::Player(void)
 	m_y=WINDOW_HEIGHT-PLAYER_HEIGHT;
 	m_d=DIRECTION_UP;							//デフォルトは上
 	m_walk_time=0;			
+	m_freeze_time=0;			
 	m_attack_num=0;
+	m_type=Player::MISIZE;
 	m_angle=0;
 	m_icon=0;
 	m_bullet.reserve(MAX_BULLET);
@@ -19,9 +21,13 @@ Player::~Player(void)
 {
 	dprintfln("~Player();");
 	m_drawsystem->remobe_Sprite(m_icon);
-	for(std::vector<Actor*>::iterator it=m_bullet.begin();it!=m_bullet.end();){
+	for(std::vector<Bullet*>::iterator it=m_bullet.begin();it!=m_bullet.end();){
 		m_manager->remove_actor(*it);
 		it=m_bullet.erase(it);
+	}
+	for(std::vector<Misile*>::iterator it=m_misile.begin();it!=m_misile.end();){
+		m_manager->remove_actor(*it);
+		it=m_misile.erase(it);
 	}
 }
 
@@ -32,7 +38,14 @@ void Player::init(DrawSystem *ds,ImageLoader *loader,ActorManager* manager){
 	m_loader=loader;
 	/*弾の生成*/
 	for(int i=0;i<MAX_BULLET;i++){
-		m_bullet.push_back(m_manager->add_actor(new Bullet(this)));
+		Bullet* tmp_bullet=new Bullet(this);
+		m_bullet.push_back(tmp_bullet);
+		m_manager->add_actor(tmp_bullet);
+	}
+	for(int i=0;i<MAX_MISILE;i++){
+		Misile* tmp_misile=new Misile(this);
+		m_misile.push_back(tmp_misile);
+		m_manager->add_actor(tmp_misile);
 	}
 	/*m_iconの初期化*/
 	m_icon=m_drawsystem->add_Sprite();		//描画システムにSpriteNode*を登録し、そのポインタをm_iconに書き込む。m_iconを使って管理する
@@ -44,7 +57,7 @@ void Player::init(DrawSystem *ds,ImageLoader *loader,ActorManager* manager){
 		C_OPTION tmp_option;
 		tmp_option.hit_flg=false;
 		tmp_option.m_x=0;
-		tmp_option.m_y=m_y;
+		tmp_option.m_y=0;
 		tmp_option.m_w=PLAYABLE_WIDTH;
 		tmp_option.m_h=PLAYER_HEIGHT;
 		tmp_option.owner=OWNER::PLAYER;
@@ -119,19 +132,37 @@ int direction(KeyState* Key,double *angle){	//キー入力で方向を決定する関数
 */
 
 void Player::update(KeyState *Key,ImageLoader* loader){
-		Move(Key);
-		Attack(Key);
+		if(m_freeze_time==0){
+			Move(Key);
+			Attack(Key);
+		}else{
+			m_freeze_time--;
+		}
 		m_icon->init_Image(loader,"player",m_d+((m_walk_time/15)%3));
 		Collision_update();
 }
 
 void Player::Attack(KeyState* Key){
 	if(Key->GetKeyDown(KEY_INPUT_RETURN)||Key->GetKeyDown(KEY_INPUT_SPACE)){
-		for(std::vector<Actor*>::iterator it=m_bullet.begin();it!=m_bullet.end();++it){
-			if(!((*it)->IsDeath()||(*it)->Get_Launch_flg())){
-				(*it)->On();
-				return;
+		switch(m_type){
+		case Player::VULCAN:
+			for(std::vector<Bullet*>::iterator it=m_bullet.begin();it!=m_bullet.end();++it){
+				if(!((*it)->IsDeath()||(*it)->Get_Launch_flg())){
+					(*it)->On();
+					return;
+				}
 			}
+			break;
+		case Player::MISIZE:
+			for(std::vector<Misile*>::iterator it=m_misile.begin();it!=m_misile.end();++it){
+				if(!((*it)->IsDeath()||(*it)->Get_Launch_flg())){
+					(*it)->On();
+					return;
+				}
+			}
+			break;
+		default:
+			break;
 		}
 	}
 }

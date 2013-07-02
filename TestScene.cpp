@@ -46,10 +46,10 @@ bool Judge(Collision* collision1,Collision* collision2){
 	C_OPTION option1=collision1->Get_Option();
 	C_OPTION option2=collision2->Get_Option();
   return
-	  ((	option1.m_x				<	option2.m_x+option2.m_w)
-    && (option1.m_x+option1.m_w >	option2.m_x)
-	&& (option1.m_y				<	option2.m_y+option2.m_h)
-    && (option1.m_y+option1.m_h >	option2.m_y));
+	  ((option1.abs_x				<	option2.abs_x+option2.m_w)
+    && (option1.abs_x+option1.m_w	>	option2.abs_x)
+	&& (option1.abs_y				<	option2.abs_y+option2.m_h)
+    && (option1.abs_y+option1.m_h	>	option2.abs_y));
 }
 
 void TestScene::Collision_judge(){

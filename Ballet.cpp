@@ -52,8 +52,8 @@ void Bullet::init(DrawSystem *ds,ImageLoader* loader,ActorManager* manager){//ア
 			C_OPTION tmp_option;
 			tmp_option.hit_flg=false;
 			tmp_option.effective=false;
-			tmp_option.m_x=m_x;
-			tmp_option.m_y=m_y;
+			tmp_option.m_x=(12-BULLET_WIDTH)/2;
+			tmp_option.m_y=0;
 			tmp_option.m_w=BULLET_WIDTH;
 			tmp_option.m_h=BULLET_HEIGHT;
 			tmp_option.owner=OWNER::BULLET;
@@ -68,7 +68,7 @@ void Bullet::Move(){
 	if(Parent_Exist()){
 		/*Move関数は常に座標の計算のみを行う*/
 		m_y-=BULLET_SPEED;
-		if(m_y<-26){
+		if(m_y<-BULLET_HEIGHT){
 			m_death_flg=true;
 		}
 	}
@@ -96,10 +96,10 @@ bool Bullet::Kill(){
 
 void Bullet::On(){
 	m_launch_flg=true;
-	m_icon->init_Image(m_loader,"misile");
+	m_icon->init_Image(m_loader,"machine_gun");
 	if(Parent_Exist()){
-		m_x=m_Parent->Get_X()+14.5;
-		m_y=m_Parent->Get_Y()+10;
+		m_x=m_Parent->Get_X()+14;
+		m_y=m_Parent->Get_Y();
 	}
 	m_icon->MoveTo(m_x,m_y);
 	m_icon->Set_ID(GAME_RESOURCE_ID::BULLET);

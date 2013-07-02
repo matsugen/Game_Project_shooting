@@ -35,6 +35,7 @@ void GameLoop::init(GameScene::MODE mode){
 	m_Key=new KeyState();							//キークラスを初期化する
 	m_loader->add_divimage("player","player.png",24,6,4,PLAYER_WIDTH/2,PLAYER_HEIGHT/2);	//Playerアイコンのロード。数は24(8方向*3)サイズは20*28
 	m_loader->add_image("misile","misile.png");
+	m_loader->add_image("machine_gun","barukan.png");
 	switch(mode){
 	case GameScene::TEST:
 		m_Scene=new TestScene();
