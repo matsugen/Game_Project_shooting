@@ -3,8 +3,12 @@ class Misile:
 	public Actor
 {
 private:
+	double m_move_time;	//ミサイルの出現からの時間
+	double m_angle;		//ミサイルの方向
 	SpriteNode* m_icon;	//弾丸のアイコン
 	void Move();		//弾丸の座標移動だけを行う。
+	double Misile_Speed();
+	SpriteNode* m_dbg;
 public:
 	Misile(void);
 	Misile(Actor* parent);
