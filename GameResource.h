@@ -33,11 +33,13 @@ namespace GAME_RESOURCE_ID{
 #define BULLET_SPEED 5.5f		//弾丸の速度
 /*ミサイルのステータス*/
 #define MAX_MISILE 1			//1画面上で存在できる弾の数
-#define MISILE_WIDTH 11.0f		//弾丸の横幅
-#define MISILE_HEIGHT 50.0f		//弾丸の縦幅
+#define MISILE_WIDTH 22.0f		//弾丸の横幅
+#define MISILE_HEIGHT 100.0f		//弾丸の縦幅
 #define MISILE_MAX_SPEED 10.0f	//弾丸の速度
-#define BOMB_RADIUS 3.0f		//爆風の半径
-#define MISILE_ANGLE 2			//ミサイルのずれ角度の最大振れ幅
+#define BOMB_HEIGHT 132.0f		//爆風のタテ
+#define BOMB_WIDTH 132.0f
+#define BOMB_TIME 44			//爆風の持続時間
+#define MISILE_ANGLE 1			//ミサイルのずれ角度の最大振れ幅
 
 /*EnemyActorのステータス*/
 #define ENEMY_SPEED_MAX 3.0f		//敵の移動速度最大値

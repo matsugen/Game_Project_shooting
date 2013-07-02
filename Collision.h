@@ -33,6 +33,7 @@ public:
 	~Collision(void);
 	void Hit();										//hit_flgをtrueにする
 	C_OPTION Get_Option();							//Collisionの内容を取得。
+	void Set_Option(C_OPTION option);
 	void update();									//このcollisionを所持するActorに合わせて動く
 	void On();										//このCollisionを有効にする
 	void Reset();									//Collisionが有効化どうかとヒットした判定をfalseにする。

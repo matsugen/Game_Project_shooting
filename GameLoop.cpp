@@ -22,12 +22,13 @@ GameLoop::GameLoop(void):
 
 GameLoop::~GameLoop(void)
 {
-	draw_time/=(double)elasped_time;
-	update_time/=(double)elasped_time;
-	dprintfln("~GameLoop();\n\t経過時間:%dF\n\t初期化時間:%d ms\n\t更新時間:%lf ms\n\t描画時間:%lf ms",elasped_time,init_time,update_time,draw_time);
+	dprintfln("~GameLoop();");
 	SAFE_DELETE(m_Key);
 	SAFE_DELETE(m_loader);
 	SAFE_DELETE(m_Scene);
+	draw_time/=(double)elasped_time;
+	update_time/=(double)elasped_time;
+	dprintfln("\t経過時間:%dF\n\t初期化時間:%d ms\n\t更新時間:%lf ms\n\t描画時間:%lf ms",elasped_time,init_time,update_time,draw_time);
 }
 
 void GameLoop::init(GameScene::MODE mode){
@@ -36,6 +37,7 @@ void GameLoop::init(GameScene::MODE mode){
 	m_loader->add_divimage("player","player.png",24,6,4,PLAYER_WIDTH/2,PLAYER_HEIGHT/2);	//Playerアイコンのロード。数は24(8方向*3)サイズは20*28
 	m_loader->add_image("misile","misile.png");
 	m_loader->add_image("machine_gun","barukan.png");
+	m_loader->add_divimage("bomb","ban.png",10,8,2,96,96);
 	switch(mode){
 	case GameScene::TEST:
 		m_Scene=new TestScene();

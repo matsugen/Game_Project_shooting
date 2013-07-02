@@ -67,7 +67,9 @@ void Collision::Hit(){
 C_OPTION Collision::Get_Option(){
 	return m_option;
 }
-
+void Collision::Set_Option(C_OPTION option){
+	m_option=option;
+}
 void Collision::update(){
 	if(m_owner==0){
 		dprintfln("%x:この判定を所持するアクターが存在しません\n",this);

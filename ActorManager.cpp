@@ -40,7 +40,7 @@ void ActorManager::init(DrawSystem* ds,ImageLoader* loader,ActorManager* manager
 	for(it=m_Actor.begin();it!=m_Actor.end();++it){
 		if(!(*it)->Initialized()){				//アクターが初期化済みでなければ初期化し、初期化済みのマークをする
 			(*it)->init(ds,loader,manager);		//すべてのアクターを初期化
-			(*it)->Ended_init();					//初期化が終了した場合以後初期化しない
+			(*it)->Ended_init();				//初期化が終了した場合以後初期化しない
 		}
 	}
 }

@@ -10,7 +10,7 @@ Player::Player(void)
 	m_walk_time=0;			
 	m_freeze_time=0;			
 	m_attack_num=0;
-	m_type=Player::MISIZE;
+	m_type=Player::MISILE;
 	m_angle=0;
 	m_icon=0;
 	m_bullet.reserve(MAX_BULLET);
@@ -132,6 +132,7 @@ int direction(KeyState* Key,double *angle){	//ƒL[“ü—Í‚Å•ûŒü‚ðŒˆ’è‚·‚éŠÖ”
 */
 
 void Player::update(KeyState *Key,ImageLoader* loader){
+		Weapon_Change(Key);
 		if(m_freeze_time==0){
 			Move(Key);
 			Attack(Key);
@@ -142,8 +143,23 @@ void Player::update(KeyState *Key,ImageLoader* loader){
 		Collision_update();
 }
 
+void Player::Weapon_Change(KeyState* Key){
+	if(Key->GetKeyDown(KEY_INPUT_SPACE)){
+		switch(m_type){
+		case Player::VULCAN:
+			m_type=Player::MISILE;
+			break;
+		case Player::MISILE:
+			m_type=Player::VULCAN;
+			break;
+		default:
+			break;
+		}
+	}
+}
+
 void Player::Attack(KeyState* Key){
-	if(Key->GetKeyDown(KEY_INPUT_RETURN)||Key->GetKeyDown(KEY_INPUT_SPACE)){
+	if(Key->GetKeyDown(KEY_INPUT_RETURN)){
 		switch(m_type){
 		case Player::VULCAN:
 			for(std::vector<Bullet*>::iterator it=m_bullet.begin();it!=m_bullet.end();++it){
@@ -153,7 +169,7 @@ void Player::Attack(KeyState* Key){
 				}
 			}
 			break;
-		case Player::MISIZE:
+		case Player::MISILE:
 			for(std::vector<Misile*>::iterator it=m_misile.begin();it!=m_misile.end();++it){
 				if(!((*it)->IsDeath()||(*it)->Get_Launch_flg())){
 					(*it)->On();

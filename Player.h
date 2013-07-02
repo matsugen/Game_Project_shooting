@@ -12,7 +12,7 @@ class Player :
 public:
 	enum BULLET_TYPE{
 		VULCAN,
-		MISIZE,
+		MISILE,
 		SHOTGUN
 	};
 private:
@@ -29,6 +29,7 @@ private:
 	/*Playerの動きを関数化*/
 	void Move(KeyState* Key);			//キャラの座標を移動
 	void Attack(KeyState* Key);			//リターンキーかスペースキーが押された時、死亡状態でなく、且つ実行状態でない弾丸を一つ実行状態にして終了する
+	void Weapon_Change(KeyState* Key);
 	/*Playerが所持する弾のアクター*/
 	std::vector<Bullet*> m_bullet;		//弾アクターの存在確認用ベクター
 	std::vector<Misile*> m_misile;		//弾アクターの存在確認用ベクター
