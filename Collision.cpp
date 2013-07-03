@@ -74,14 +74,19 @@ void Collision::update(){
 	if(m_owner==0){
 		dprintfln("%x:この判定を所持するアクターが存在しません\n",this);
 	}else{
+		if(m_option.owner==OWNER::PLAYER){
+			m_option.abs_x=0;
+			m_option.abs_y=m_owner->Get_Y()+m_option.m_y;
+		}else{
+			m_option.abs_x=m_owner->Get_X()+m_option.m_x;
+			m_option.abs_y=m_owner->Get_Y()+m_option.m_y;
+		}
 #ifndef NDEBUG
 		if(!m_option.effective){
 			m_box->init_None();
 		}else{
 			m_box->init_Box(m_option.m_w,m_option.m_h);
 			if(m_option.owner==OWNER::PLAYER){
-				m_option.abs_x=0;
-				m_option.abs_y=m_owner->Get_Y()+m_option.m_y;
 				m_box->MoveTo(0,m_option.abs_y);
 			}else{
 				m_option.abs_x=m_owner->Get_X()+m_option.m_x;
