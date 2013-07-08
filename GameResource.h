@@ -39,7 +39,8 @@ namespace GAME_RESOURCE_ID{
 #define BOMB_HEIGHT 132.0f		//爆風のタテ
 #define BOMB_WIDTH 132.0f
 #define BOMB_TIME 44			//爆風の持続時間
-#define MISILE_ANGLE 1			//ミサイルのずれ角度の最大振れ幅
+#define MISILE_ANGLE 2
+		//ミサイルのずれ角度の最大振れ幅
 
 /*EnemyActorのステータス*/
 #define ENEMY_SPEED_MAX 3.0f		//敵の移動速度最大値

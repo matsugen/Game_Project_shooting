@@ -36,5 +36,6 @@ public:
 	void Set_Option(C_OPTION option);
 	void update();									//このcollisionを所持するActorに合わせて動く
 	void On();										//このCollisionを有効にする
+	void Off();										//このCollisionを無効にする。ヒット判定は変えない
 	void Reset();									//Collisionが有効化どうかとヒットした判定をfalseにする。
 };

@@ -100,6 +100,9 @@ void Collision::update(){
 void Collision::On(){
 	m_option.effective=true;
 }
+void Collision::Off(){
+	m_option.effective=false;
+}
 void Collision::Reset(){
 		m_option.hit_flg=false;
 		m_option.effective=false;

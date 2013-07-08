@@ -8,6 +8,8 @@ Enemy::Enemy(void)
 	dprintfln("Enemy();");
 	m_icon=0;
 	m_Emergency_interval=0;
+	m_speed=0;
+	m_alpha=0;
 }
 
 
@@ -18,19 +20,9 @@ Enemy::~Enemy(void)
 }
 
 void Enemy::update(KeyState* Key,ImageLoader* loader){						//XVŠÖ”:”h¶ƒNƒ‰ƒX‚Ìprivate‚ÉŠeíXV‚ğ‚Ü‚Æ‚ß‚½ŠÖ”‚ğ‚Â‚­‚èA‚»‚ê‚ğ‡‚ÉÀs‚·‚é
-	if(m_Emergency_interval>0){
-		m_Emergency_interval--;
-	}else if(m_Emergency_interval==0){
-		On();
-		m_Emergency_interval=-1;
-	}
-	if(m_launch_flg){
-		m_y+=m_speed;
-		m_icon->MoveTo(m_x,m_y);
-		if(m_y>480){
-		m_death_flg=true;
-		}
-	}
+	Death();
+	Launch();
+	Move();
 	Hit();
 	Collision_update();
 }
@@ -43,6 +35,8 @@ void Enemy::init(DrawSystem *ds,ImageLoader* loader,ActorManager* manager){	//ƒA
 		m_icon=m_drawsystem->add_Sprite();
 	}
 	m_icon->init_None();
+	m_alpha=255;
+	m_icon->Blend_Setting(DX_BLENDMODE_ALPHA,m_alpha);
 	/*”»’è‚Ì‰Šú‰»‚ğ‚à‚¤­‚µŠÈ’P‚É‚Å‚«‚È‚¢‚©H*/
 	/*”»’è‚ÌƒXƒe[ƒ^ƒXİ’è*/
 	if(m_collisions.size()<1){
@@ -51,13 +45,43 @@ void Enemy::init(DrawSystem *ds,ImageLoader* loader,ActorManager* manager){	//ƒA
 		tmp_option.hit_flg=false;
 		tmp_option.effective=false;
 		tmp_option.m_x=0;
-		tmp_option.m_y=0;
+		tmp_option.m_y=ENEMY_HEIGHT/4;
 		tmp_option.m_w=ENEMY_WIDTH;
-		tmp_option.m_h=ENEMY_HEIGHT;
+		tmp_option.m_h=ENEMY_HEIGHT/2;
 		Add_Collision(tmp_option);
 	}
 	/*‹N“®‚Ü‚Å‚ÌŠÔ‚ğ—”‚É‚æ‚Á‚ÄŒˆ’è*/
 	m_Emergency_interval=GetRand(CREATE_INTERVAL_MAX-CREATE_INTERVAL_MIN-1)+CREATE_INTERVAL_MIN;
+}
+
+
+void Enemy::Death(){
+	if(m_collisions[0]->Get_Option().hit_flg){
+		m_icon->Blend_Setting(DX_BLENDMODE_ALPHA,m_alpha);
+		m_alpha-=50;
+	}
+	if(m_alpha<0){
+		m_death_flg=true;
+	}
+}
+
+void Enemy::Move(){
+	if(m_launch_flg){
+		m_y+=m_speed;
+		m_icon->MoveTo(m_x,m_y);
+		if(m_y>480){
+		m_death_flg=true;
+		}
+	}
+}
+
+void Enemy::Launch(){
+	if(m_Emergency_interval>0){
+		m_Emergency_interval--;
+	}else if(m_Emergency_interval==0){
+		On();
+		m_Emergency_interval=-1;
+	}
 }
 void Enemy::Hit(){															//ƒQ[ƒ€ƒV[ƒ“‘¤‚Å”»’è‚ªÕ“Ë‚µ‚½ê‡‚ÉŒÄ‚Ño‚³‚ê‚éB
 	bool all_hit_flg=false;
@@ -66,7 +90,9 @@ void Enemy::Hit(){															//ƒQ[ƒ€ƒV[ƒ“‘¤‚Å”»’è‚ªÕ“Ë‚µ‚½ê‡‚ÉŒÄ‚Ño‚³‚
 		all_hit_flg|=tmp_option.hit_flg;
 	}
 	if(all_hit_flg){
-		m_death_flg=true;
+		for(std::vector<Collision*>::iterator it=m_collisions.begin();it!=m_collisions.end();++it){
+			(*it)->Off();
+		}
 	}
 }
 

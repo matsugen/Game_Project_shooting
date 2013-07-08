@@ -34,7 +34,7 @@ void Score_Board::init(DrawSystem *ds,ImageLoader* loader,ActorManager* manager)
 	m_back->init_Box(WINDOW_WIDTH-PLAYABLE_WIDTH,WINDOW_HEIGHT);
 	m_back->Change_Color(150,150,150);
 	m_back->MoveTo(PLAYABLE_WIDTH,0);
-	m_back->Set_ID(BACK_GROUND_ID);
+	m_back->Set_ID(FRONT_GROUND_ID);
 	/*スコアの文字列のセット*/
 	m_text=m_drawsystem->add_Sprite();
 	m_text->init_Text("Score:%08d",m_point);

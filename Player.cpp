@@ -56,6 +56,7 @@ void Player::init(DrawSystem *ds,ImageLoader *loader,ActorManager* manager){
 	if(m_collisions.size()<1){
 		C_OPTION tmp_option;
 		tmp_option.hit_flg=false;
+		tmp_option.effective=true;
 		tmp_option.m_x=0;
 		tmp_option.m_y=0;
 		tmp_option.m_w=PLAYABLE_WIDTH;

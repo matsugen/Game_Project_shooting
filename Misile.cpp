@@ -170,7 +170,7 @@ void Misile::On(){
 	m_icon->init_Image(m_loader,"misile");
 	m_icon->Image_Magnificant(2.0,2.0);
 	if(Parent_Exist()){
-		m_x=m_Parent->Get_X()+14.5;
+		m_x=m_Parent->Get_X()+(40-22)/2;
 		m_y=m_Parent->Get_Y();
 	}
 	m_icon->MoveTo(m_x,m_y);

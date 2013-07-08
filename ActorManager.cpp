@@ -5,7 +5,7 @@ ActorManager::ActorManager(void)
 {
 	dprintfln("ActorManager();");
 	m_count=0;
-	m_Actor.reserve(1024);
+	m_Actor.reserve(512);
 }
 
 

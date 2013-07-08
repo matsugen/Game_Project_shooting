@@ -21,7 +21,7 @@ void Node_Sort(std::vector<SpriteNode*> &v){//親子関係を崩さないように挿入ソート
 DrawSystem::DrawSystem(void)
 {
 	dprintfln("DrawSystem();");
-	m_Sprite.reserve(1024);
+	m_Sprite.reserve(8192);
 }
 
 
